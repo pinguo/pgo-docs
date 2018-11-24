@@ -140,5 +140,9 @@ map[string]string{
 使用SetAlias/GetAlias设置和解析别名字符串，例如：
 `GetAlias("@runtime/info.log")`会将@runtime替换成实际的运行目录
 
+## 命令行参数
+- --env production, 指定程序的环境配置目录，默认为production
+- --cmd /foo/bar, 指定程序为命令行模式，并运行指定命令，默认为WEB模式
+- --base /base/path, 指定基础目录，默认为项目根目录，通常在单测时需要指定
 
 
