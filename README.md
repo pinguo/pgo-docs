@@ -1,5 +1,7 @@
 # PGO参考文档
-PGO应用框架即"Pinguo GO application framework"，是Camera360广告服务端团队研发的一款简单、高性能、组件化的GO应用框架。受益于GO语言高性能与原生协程，业务从php+yii2升级到PGO后，线上表现单机处理能力提高5-10倍。在PGO的开发过程中，参考了php-yii2/php-msf/go-gin等框架的设计思想，平衡了运行性能与开发效率。
+PGO应用框架即"Pinguo GO application framework"，是Camera360广告服务端团队研发的一款简单、高性能、组件化的GO应用框架。受益于GO语言高性能与原生协程，业务从php+yii2升级到PGO后，线上表现单机处理能力提高10倍。
+
+本文档介绍PGO核心组件的概念、使用与原理，再结合[pgo-demo](https://github.com/pinguo/pgo-demo)项目，开发者就能够使用PGO轻松地开发出高性能的WEB应用程序。
 
 # 目录
 * [框架概述(Overview)](Overview.md)
@@ -14,17 +16,12 @@ PGO应用框架即"Pinguo GO application framework"，是Camera360广告服务�
 * [国际化组件(I18n)](I18n.md)
 * [视图组件(View)](View.md)
 * [控制器(Controller)](Controller.md)
-* [插件(Plugin)](Plugin/Overview.md)
-    * 静态文件(TODO)
-    * 访问日志(TODO)
-* [过滤器(Filter)](Filter/Overview.md)
-    * 内网过滤(TODO)
-    * ...
+* [插件(Plugin)](Plugin/Plugin.md)
 * [客户端(Client)](Client/Overview.md)
+    * [Db](Client/Db.md)
     * [Http](Client/Http.md)
     * [MaxMind](Client/MaxMind.md)
     * [Memcache](Client/Memcache.md)
     * [Memory](Client/Memory.md)
     * [Mongo](Client/Mongo.md)
-    * [Mysql](Client/Mysql.md)
     * [Redis](Client/Redis.md)
