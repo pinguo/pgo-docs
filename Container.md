@@ -6,7 +6,7 @@ Container用于类的注册创建，用于解决GO语言下不能通过字符串
 - 属性设置(SetXxx方法或导出字段)
 - 初始函数(Init)
 
-通常组件对象都是全局单例，而一个请求周期内的对象会随着请求结束而销毁，为尽量减少GC的次数和时间，后续会对请求周期的对象进行缓存。
+通常组件对象都是全局单例，而一个请求周期内的对象会随着请求结束而销毁，为尽量减少GC的次数和时间，后续会对请求周期内的对象进行缓存。
 
 除全局对象外，一个请求周期内的对象通常会继承pgo.Object以加入请求上下文件支持。
 
@@ -48,7 +48,7 @@ func (p *People) SetSex(sex string) {
     p.sex = sex
 }
 
-// 注册类，通常将init方法放入包中的Inig.go文件中
+// 注册类，通常将init方法放入包中的Init.go文件中
 func init() {
     container := pgo.App.GetContainer() // 获取容器对象
     container.Bind(&People{}) // 注册类模板对象
