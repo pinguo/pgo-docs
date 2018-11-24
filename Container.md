@@ -12,8 +12,6 @@ Container用于类的注册创建，用于解决GO语言下不能通过字符串
 
 ## 使用示例
 ```go
-
-```go
 type People struct {
     // 继承自pgo.Object可增加上下文支持，
     // 由于组件是全局对象，没有请求上下文，
