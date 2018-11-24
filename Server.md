@@ -1,6 +1,8 @@
 # 服务器组件(Server)
 Server封装了命令行和HTTP的处理逻辑，实现了http.Handler接口和pgo.IPlugin接口，主要的逻辑实现在ServeCMD, ServeHTTP, HandleRequest三个函数中。
 
+Server支持SIGTERM/SIGINT信号的平滑关闭，默认每1分钟会输出程序状态到INFO日志中。
+
 ## 配置说明
 ```go
 "server": {
@@ -47,5 +49,4 @@ Server封装了命令行和HTTP的处理逻辑，实现了http.Handler接口和p
 插件只对http/https服务生效，command和debug服务不生效。
 
 插件针对全局所有请求生效，若只需要处理某些特定url的请求，推荐在Controller.BeforeAction钩子中实现。
-
 
