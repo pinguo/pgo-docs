@@ -1,4 +1,5 @@
-# 日志(Dispatcher)
+# 日志(Log)
+
 日志提供常用的分级(DEBUG/INFO/NOTICE/WARN/ERROR/FATAL)日志功能，并且增加了追踪ID, pushlog, profile, counting等功能 。
 
 目前内置控制台(ConsoleTarget)和文件(FileTarget)两种输出方式，满足绝大部分使用场景，用户可以添加自定义的格式化类，也可以自行实现输出目标(Target)，以满足特殊定制化的需求。

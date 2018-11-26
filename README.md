@@ -10,7 +10,7 @@ PGO应用框架即"Pinguo GO application framework"，是Camera360广告服务�
 * [容器组件(Container)](Container.md)
 * [服务器组件(Server)](Server.md)
 * [路由组件(Router)](Router.md)
-* [日志组件(Dispatcher)](Dispatcher.md)
+* [日志组件(Log)](Log.md)
 * [状态码组件(Status)](Status.md)
 * [国际化组件(I18n)](I18n.md)
 * [视图组件(View)](View.md)
