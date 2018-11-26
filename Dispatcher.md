@@ -1,7 +1,7 @@
 # 日志(Dispatcher)
 日志提供常用的分级(DEBUG/INFO/NOTICE/WARN/ERROR/FATAL)日志功能，并且增加了追踪ID, pushlog, profile, counting等功能 。
 
-目前内置控制台(ConsoleTarget)和文件(FileTarget)两种输出方式，满足绝对大部分使用场景，用户可以添加自定义的格式化类，也可以自行实现输出目标(Target)，以满足特殊定制化的需求。
+目前内置控制台(ConsoleTarget)和文件(FileTarget)两种输出方式，满足绝大部分使用场景，用户可以添加自定义的格式化类，也可以自行实现输出目标(Target)，以满足特殊定制化的需求。
 
 在没有任何配置的情况下，日志组件会将所有级别的日志输出到控制台。
 
@@ -30,7 +30,7 @@
             // 处理的日志级别
             "levels": "DEBUG,INFO,NOTICE",
 
-            // 指定日志格器，通常不指定，使用内置
+            // 指定日志格式器，通常不指定，使用内置
             "formatter": "Lib/PGLogFormatter",
 
             // 日志文件路径，支持别名
