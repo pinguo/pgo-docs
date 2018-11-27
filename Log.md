@@ -1,4 +1,4 @@
-# 日志(Log)
+# 日志组件(Log)
 
 日志提供常用的分级(DEBUG/INFO/NOTICE/WARN/ERROR/FATAL)日志功能，并且增加了追踪ID, pushlog, profile, counting等功能 。
 

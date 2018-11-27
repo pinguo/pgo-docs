@@ -71,7 +71,7 @@ Application的配置文件即是整个程序的配置文件(conf/app.json)，通
 // "log": {
 //     // 组件必须指定类名class, 其它字段为组件的配置属性
 //     // 核心组件的class由框架设定，比如log组件的class
-//     // 固定为"class": "@pgo/Dispatcher"
+//     // 固定为"class": "@pgo/Log"
 //     "levels": "ALL",
 //     "traceLevels": "DEBUG"
 //     "chanLen": 1000,
@@ -119,7 +119,7 @@ redis := pgo.App.Get("redis").(*Redis.Client)
 ```go
 map[string]string{
     "router": "@pgo/Router",        // 路由组件
-    "log":    "@pgo/Dispatcher",    // 日志组件
+    "log":    "@pgo/Log",           // 日志组件
     "status": "@pgo/Status",        // 状态码组件
     "i18n":   "@pgo/I18n",          // 国际化组件
     "view":   "@pgo/View",          // 视图组件
