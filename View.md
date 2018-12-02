@@ -4,18 +4,16 @@
 
 ## 配置文件
 
-```go
-// 视图组件配置(app.components.view)
-"view": {
-    // 视图文件默认后缀，默认为".html"
-    "suffix": ".html",
+```yaml
+# 视图组件配置(app.components.view)
+view:
+    # 视图文件默认后缀，默认为".html"
+    suffix: ".html",
     
-    // 通用视图文件列表，默认为空
-    "commons": [
-        "@view/common/header.html",
-        "@view/common/footer.html"
-    ]
-}
+    # 通用视图文件列表，默认为空
+    commons:
+        - "@view/common/header.html"
+        - "@view/common/footer.html"
 ```
 
 ## 使用示例

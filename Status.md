@@ -16,19 +16,17 @@
 
 ## 配置文件
 
-```go
-"status": {
-    // 是否处理消息国际化，默认为false
-    // 国际化组件参见I18n组件
-    "useI18n": false,
+```yaml
+status:
+    # 是否处理消息国际化，默认为false
+    # 国际化组件参见I18n组件
+    useI18n: false,
     
-    // 状态码及消息映射
-    "mapping": {
-        "1000": "Success",
-        "1001": "System Error",
-        "1002": "Verify Sign Error"
-    }
-}
+    # 状态码及消息映射
+    mapping:
+        1000: "Success"
+        1001: "System Error"
+        1002: "Verify Sign Error"
 ```
 
 
