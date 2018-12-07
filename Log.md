@@ -26,7 +26,7 @@ log:
     targets:
         // 信息日志
         info:
-            // 输出到文件
+            // 文件输出
             class: "@pgo/FileTarget"
 
             // 处理的日志级别

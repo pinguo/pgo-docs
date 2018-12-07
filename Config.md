@@ -1,11 +1,11 @@
 # 配置组件(Config)
-用于管理应用程序的配置文件，支持全局配置和环境配置，目前仅支持json，后续会内置yaml配置文件以支持注释等特性。
+用于管理应用程序的配置文件，支持全局配置和环境配置，支持yaml和json配置文件，推荐使用yaml配置文件以支持注释等特性。
 
 用户可以自行添加特定文件后缀的配置文件解析器，参见Config.AddParser().
 
 说明：
 - 配置文件根目录为`@app/conf`，根目录下支持环境目录，如：production, dev, qa等
-- 应用配置为`app.json`，可任意添加自定义配置文件， 如：`params.json`
+- 应用配置为`app.yaml`，可任意添加自定义配置文件， 如：`params.yaml`
 - 运行程序时通过`--env production`指定环境目录为`production`
 - 环境目录中的配置会递归合并到全局配置中
 - 配置文件支持环境变量，格式`${envName||default}`，当envName不存在时使用default
