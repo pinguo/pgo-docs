@@ -10,6 +10,15 @@ Container用于类的注册创建，用于解决GO语言下不能通过字符串
 
 除全局对象外，一个请求周期内的对象通常会继承pgo.Object以加入请求上下文件支持。
 
+## 配置文件
+配置位于(app.yaml)中
+
+```yaml
+container:
+    # 是否启用对象池，默认为true
+    enablePool: true
+```
+
 ## 使用示例
 ```go
 type People struct {
