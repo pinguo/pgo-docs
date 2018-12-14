@@ -13,9 +13,9 @@ Db组件支持读写分离，`SELECT`语句默认在从库中执行，其余语�
 # 组件ID，db组件可以配置多个，只要分配唯一的组件ID, 通过
 # GetObject(Db.AdapterClass, <id>)来获取非默认db组件
 db:
-	# Db组件类名称
-	class:  "@pgo/Client/Db/Client"
-	# 驱动名(需导入指定的驱动包)
+    # Db组件类名称
+    class:  "@pgo/Client/Db/Client"
+    # 驱动名(需导入指定的驱动包)
     driver: "mysql"
     # 主库地址(参见各驱动包说明)
     dsn: "user:pass@tcp(127.0.0.1:3306)/db?charset=utf8&timeout=0.5s"
