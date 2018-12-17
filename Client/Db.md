@@ -8,7 +8,6 @@ import _ "github.com/go-sql-driver/mysql"
 Db组件支持读写分离，`SELECT`语句默认在从库中执行，其余语句在主库中执行，支持慢日志记录。
 
 ## 配置文件
-
 ```yaml
 # 组件ID，db组件可以配置多个，只要分配唯一的组件ID, 通过
 # GetObject(Db.AdapterClass, <id>)来获取非默认db组件
@@ -30,7 +29,6 @@ db:
 ```
 
 ## 使用示例
-
 ```go
 // 使用db.Exec/db.ExecContext在主库上执行非查询操作
 func (m *MysqlController) ActionExec() {
@@ -38,7 +36,7 @@ func (m *MysqlController) ActionExec() {
     db := m.GetObject(Db.AdapterClass).(*Db.Adapter)
 
     // 执行插入操作
-    query := "INSERT INTO `test` (`name`, `age`) VALUES (?, ?)"
+    query := "INSERT INTO test (name, age) VALUES (?, ?)"
     db.Exec(query, "name11", 11)
 
     // 执行修改操作
@@ -50,13 +48,20 @@ func (m *MysqlController) ActionExec() {
     db.Exec(query, lastId)
 }
 
-// 使用db.Query/QueryContext来查询数据，若当前db对象未执行过任何操作，
-// 则使用从库进行查询，否则复用上一次获取的db连接。
+// 使用db.Query/QueryOne/QueryContext/QueryOneContext来查询数据，
+// 若当前db对象未执行过任何操作，则使用从库进行查询，否则复用上一次获取的db连接。
 func (m *MysqlController) ActionQuery() {
     // 获取db的上下文适配对象
     db := m.GetObject(Db.AdapterClass).(*Db.Adapter)
+    
+    // 查询单条数据
+    id, name, age := 0, "", 0
+    query := "SELECT id, name, age FROM test WHERE id=?"
+    db.QueryOne(query, 3).Scan(&id, &name, &age)
+    fmt.Println("query one for id=3, ", id, name, age)
 
-    query := "SELECT id, name, age FROM `test` WHERE age>?"
+    // 查询多条数据
+    query = "SELECT id, name, age FROM test WHERE age>?"
     rows := db.Query(query, 10)
     defer rows.Close()
 
@@ -76,6 +81,7 @@ func (m *MysqlController) ActionPrepare() {
 
     query := "INSERT INTO test (name, age) VALUES (?, ?)"
     stmt := db.Prepare(query)
+    defer stmt.Close()
 
     for i := 0; i < 10; i++ {
         stmt.Exec(fmt.Sprintf("name%d", i), i)
