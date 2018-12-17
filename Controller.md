@@ -10,6 +10,10 @@
 
 由于控制器是请求的入口，需要在main包中手动导入，为方便起见，建议不论Controller层有多深统一在Controller或Command包的init方法中注册。
 
+HTTP控制器位于`src/Controller`目录下，类后后缀为`Controller`。
+
+命令控制器位于`src/Command`目录下，类后缀为`Command`，运行命令控制器需要通过`--cmd`选项指定，例如：`bin/pgo-demo --cmd /test/index`。
+
 ## 使用示例
 
 ```go

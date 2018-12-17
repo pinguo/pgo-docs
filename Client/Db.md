@@ -8,6 +8,7 @@ import _ "github.com/go-sql-driver/mysql"
 Db组件支持读写分离，`SELECT`语句默认在从库中执行，其余语句在主库中执行，支持慢日志记录。
 
 ## 配置文件
+
 ```yaml
 # 组件ID，db组件可以配置多个，只要分配唯一的组件ID, 通过
 # GetObject(Db.AdapterClass, <id>)来获取非默认db组件
