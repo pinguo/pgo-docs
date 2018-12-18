@@ -7,7 +7,7 @@ Mongo组件是对`github.com/globalsign/mgo`的封装，更多文档请参见[mg
 ```yaml
 # 组件ID，默认为"mongo"
 mongo:
-	# 组件类名称
+    # 组件类名称
     class: "@pgo/Client/Mongo/Client"
     # mongo地址
     dsn: "mongodb://host1:port1/[db][?options]"
@@ -15,8 +15,8 @@ mongo:
     # connectTimeout: "1s"
     # 读取超时，默认10秒
     # readTimeout: "10s"
- 	# 写入超时，默认10秒
- 	# writeTimeout: "10s"
+    # 写入超时，默认10秒
+    # writeTimeout: "10s"
 ```
 
 其中`dsn`配置字段参考[mgo.Dial()](https://godoc.org/github.com/globalsign/mgo#Dial)。默认的dsn参数：
