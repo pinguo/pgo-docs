@@ -87,11 +87,26 @@ glide update            # 更新依赖包
 ```
 
 # 快速开始
-1. 创建项目目录(以下三种方法均可)
+
+1. 拷贝makefile
+    推荐使用make做为编译打包的控制工具，从[pgo](https://github.com/pinguo/pgo)或[pgo-demo](https://github.com/pinguo/pgo-demo)工程下将makefile复制到项目目录下。
+
+    ```sh
+    make start	# 编译并运行当前工程
+    make stop   # 停止当前工程的进程
+    make build	# 仅编译当前工程
+    make update # 更新glide依赖
+    make pgo    # 安装pgo框架到当前工程
+    make init   # 初始化工程目录
+    make help   # 输出帮助信息
+    ```
+
+2. 创建项目目录(以下三种方法均可)
+    - 执行`make init`创建目录
     - 参见《项目目录》手动创建
     - 从[pgo-demo](https://github.com/pinguo/pgo-demo)克隆目录结构
-    - 复制makefile至项目根目录并执行`make init`
-2. 修改配置文件(conf/app.yaml)
+
+3. 修改配置文件(conf/app.yaml)
     ```yaml
     name: "pgo-demo"
     GOMAXPROCS: 2
@@ -118,53 +133,58 @@ glide update            # 更新依赖包
                     class: "@pgo/ConsoleTarget"
                     levels: "ALL"
     ```
-3. 安装PGO(以下两种方法均可)
+
+4. 安装PGO(以下两种方法均可)
+    - 在项目根目录执行`make pgo`安装PGO
     - 在项目根目录执行`export GOPATH=$(pwd) && cd src && glide get github.com/pinguo/pgo`
-    - 复制makefile至项目根目录并执行`make pgo`
-4. 创建控制器(src/Controller/WelcomeController.go)
+
+5. 创建控制器(src/Controller/WelcomeController.go)
     ```go
     package Controller
-
+    
     import (
         "github.com/pinguo/pgo"
         "net/http"
         "time"
     )
-
+    
     type WelcomeController struct {
         pgo.Controller
     }
-
+    
     func (w *WelcomeController) ActionIndex() {
         w.OutputJson("hello world", http.StatusOK)
     }
     ```
-5. 注册控制器(src/Controller/Init.go)
+
+6. 注册控制器(src/Controller/Init.go)
     ```go
     package Controller
-
+    
     import "github.com/pinguo/pgo"
-
+    
     func init() {
         container := pgo.App.GetContainer()
         container.Bind(&WelcomeController{})
     }
     ```
-6. 创建程序入口(src/Main/main.go)
+
+7. 创建程序入口(src/Main/main.go)
     ```go
     package main
-
+    
     import (
         _ "Controller" // 导入控制器
-
+    
         "github.com/pinguo/pgo"
     )
-
+    
     func main() {
         pgo.Run() // 运行程序
     }
     ```
-7. 编译运行
+
+8. 编译运行
     ```sh
     make start
     curl http://127.0.0.1:8000/welcome
