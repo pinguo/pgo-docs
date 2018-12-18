@@ -1,6 +1,6 @@
 # MaxMind
 
-MaxMind组件封装了MaxMind的GEO查询功能，能通过IP来确定国家、省市等地理信息。geo数据库文件需要用户自行获取(获取免费或收费的geo数据文件)。
+MaxMind组件封装了`github.com/oschwald/maxminddb-golang`的GEO查询功能，能通过IP来确定国家、省市等地理信息。geo数据库文件需要用户自行获取(获取免费或收费的geo数据文件)。
 
 GEO查询结果定义：
 
