@@ -49,9 +49,9 @@ ctx.Counting("key", 1, 1)                   // 记录命中记数
 ctx.ProfileStart/ProfileStop/ProfileAdd()   // 记录耗时数据
 
 // 其它
-ctx.Next()			// 调用后续插件链处理完毕
+ctx.Next()			// 等待后续插件链处理完毕
 ctx.Abort()			// 结束插件链处理并退出
-ctx.Copy()			// 复制当前上下文件
+ctx.Copy()			// 复制当前上下文
 ctx.GetElapseMs()	// 获取当前请求耗时
 ctx.GetLogId()		// 获取当前请求日志ID
 ```

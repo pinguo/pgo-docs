@@ -49,7 +49,7 @@ func (w *WelcomeController) AfterAction(action string) {
 }
 
 // 执行异常捕获，不建议用户自己实现
-func (w *WelcomeController) Handler(v interface{}) {
+func (w *WelcomeController) HandlePanic(v interface{}) {
 }
 
 // 默认动作为index, 通过/welcome或/welcome/index调用

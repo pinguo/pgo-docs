@@ -1,6 +1,6 @@
 # 插件(Plugin)
 
-插件用于扩展应用的功能，pgo.Server本身就是一个插件，应用初始化时，会将pgo.App.server放到插件列表的最后一个，插件的执行顺序为`app.server.plugins`的定义顺序，插件做为一个组件定义，假设定义的两个插件`app.server.plugins=["p1", "p2"]`，那么执行顺序为：
+插件用于扩展应用的功能，pgo.Server本身就是一个插件，应用初始化时，会将pgo.App.server放到插件列表的最后一个，插件的执行顺序为`app.server.plugins`的定义顺序，插件做为一个组件定义，假设定义了两个插件`app.server.plugins=["p1", "p2"]`，那么执行顺序为：
 
 1. p1.HandleRequest(ctx)
 2. p2.HandleRequest(ctx)

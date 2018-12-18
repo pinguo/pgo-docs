@@ -29,8 +29,6 @@ status:
         1002: "Verify Sign Error"
 ```
 
-
-
 ## 使用示例
 
 ```go

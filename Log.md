@@ -10,47 +10,47 @@
 ```yaml
 # app.components.log
 log:
-    // 总级别开关，默认为ALL
+    # 总级别开关，默认为ALL
     levels: "ALL"
 
-    // 追加trace的级别，默认为DEBUG
-    traceLevels: "DEBUG"
+    # 追加trace的级别，默认为DEBUG
+    # traceLevels: "DEBUG"
 
-    // 日志管道缓冲长度，默认为1000
-    chanLen: 1000
+    # 日志管道缓冲长度，默认为1000
+    # chanLen: 1000
 
-    // 日志冲刷周期，默认60s
-    flushInterval: "60s"
+    # 日志冲刷周期，默认60s
+    # flushInterval: "60s"
 
-    // 输出目标，为空时输出到控制台
+    # 输出目标，为空时输出到控制台
     targets:
-        // 信息日志
+        # 信息日志
         info:
-            // 文件输出
+            # 文件输出
             class: "@pgo/FileTarget"
 
-            // 处理的日志级别
+            # 处理的日志级别
             levels: "DEBUG,INFO,NOTICE"
 
-            // 指定日志格式器，通常不指定，使用内置
-            formatter: "Lib/PGLogFormatter"
+            # 指定日志格式器，通常不指定，使用内置
+            # formatter: "Lib/PGLogFormatter"
 
-            // 日志文件路径，支持别名
+            # 日志文件路径，支持别名
             filePath: "@runtime/info.log"
 
-            // 保留历史日志文件个数，默认10
-            maxLogFile: 10
+            # 保留历史日志文件个数，默认10
+            # maxLogFile: 10
 
-            // 最大缓存日志字节数，默认10MB
-            maxBufferBytes: 10485760
+            # 最大缓存日志字节数，默认10MB
+            # maxBufferBytes: 10485760
 
-            // 最大缓存日志行数，默认10000
-            maxBufferLine: 10000
+            # 最大缓存日志行数，默认10000
+            # maxBufferLine: 10000
 
-            // 日志回滚策略(none/hourly/daily), 默认按天回滚
-            rotate: "daily"
+            # 日志回滚策略(none/hourly/daily), 默认按天回滚
+            # rotate: "daily"
 
-        // 错误日志
+        # 错误日志
         error:
             class: "@pgo/FileTarget"
             levels: "WARN,ERROR,FATAL"
@@ -58,13 +58,14 @@ log:
             maxLogFile: 10
             rotate: "daily"
 
-        // 控制台日志
+        # 控制台日志
         console:
             class: "@pgo/ConsoleTarget"
             levels: "ALL"
 ```
 
 ## 全局日志
+
 全局日志对象通过`pgo.GLogger()`获取，全局日志对象只在没有上下文的组件中使用，通常建议在组件中使用panic将错误信息抛出来，由相应的请求对象来记录日志，这样会带上请求ID，方便调试。
 
 示例：
