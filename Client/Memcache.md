@@ -3,11 +3,10 @@
 Memcache组件提供了memcache客户端的功能，数据在多个server间按一致性hash分布，支持连接池，支持数据的自动序列化，如果key未明确指定过期时间，则默认过期时间为1天。
 
 ## 配置文件
-
 ```yaml
 # 组件ID，默认为"memcache"
 memcache:
-	# 组件类名称
+    # 组件类名称
     class: "@pgo/Client/Memcache/Client"
     # KEY前缀，默认为"pgo_"
     # prefix: "pgo_"
@@ -26,22 +25,25 @@ memcache:
 ```
 
 ## 功能列表
-
 ```go
-mc.Get(key)          // 获取key的值
-mc.MGet(keys)        // 并行获取多个key的值
-mc.Set(key, val)     // 设置key的值
-mc.MSet(items)       // 并行设置多个key的值
-mc.Add(key, val)     // 添加key的值(key存在时添加失败)
-mc.MAdd(items)       // 并行添加多个key的值
-mc.Del(key)          // 删除key的值
-mc.MDel(keys)        // 并行删除多个key的值
-mc.Exists(key)       // 判断key是否存在
-mc.Incr(key1, delta) // 累加key的值
+mc.Get(key)                 // 获取key的值
+mc.MGet(keys)               // 并行获取多个key的值
+mc.Set(key, val)            // 设置key的值
+mc.MSet(items)              // 并行设置多个key的值
+mc.Add(key, val)            // 添加key的值(key存在时添加失败)
+mc.MAdd(items)              // 并行添加多个key的值
+mc.Del(key)                 // 删除key的值
+mc.MDel(keys)               // 并行删除多个key的值
+mc.Exists(key)              // 判断key是否存在
+mc.Incr(key1, delta)        // 累加key的值
+
+mc.Retrieve(cmd, key)       // 执行获取命令
+mc.MultiRetrieve(cmd, keys) // 批量执行获取命令
+mc.Store(cmd, item)         // 执行储存命令
+mc.MultiStore(cmd, items)   // 批量执行储存命令
 ```
 
 ## 使用示例
-
 ```go
 // curl -v http://127.0.0.1:8000/memcache/set
 func (m *MemcacheController) ActionSet() {
@@ -99,4 +101,3 @@ func (m *MemcacheController) ActionGet() {
     }
 }
 ```
-

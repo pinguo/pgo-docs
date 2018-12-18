@@ -29,7 +29,25 @@ db:
     # slowLogTime: "100ms"
 ```
 
+## 功能列表
+
+```go
+db.Begin()           // 开始一个新事务(默认超时上下文)
+db.BeginContext()    // 开始一个新事务(指定上下文)
+db.Commit()          // 提交一个事务
+db.Rollback()        // 回滚一个事务
+db.QueryOne()        // 查询单个文档(默认超时上下文)
+db.QueryOneContext() // 查询单个文档(指定上下文)
+db.Query()           // 查询多个文档(默认超时上下文)
+db.QueryContext()    // 查询多个文档(指定上下文)
+db.Exec()            // 非查询操作(默认超时上下文)
+db.ExecContext()     // 非查询操作(指定上下文)
+db.Prepare()         // 批量操作(默认超时上下文)
+db.Prepare()         // 批量操作(指定上下文)
+```
+
 ## 使用示例
+
 ```go
 // 使用db.Exec/db.ExecContext在主库上执行非查询操作
 func (m *MysqlController) ActionExec() {

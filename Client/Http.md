@@ -9,7 +9,7 @@ HTTP组件是对GO内置net/http包的Client组件封装，增加组件配置、
 ```yaml
 # 组件ID，默认为http，http做为核心组件，一般不用自行设置
 http:
-	# 组件类名称，
+    # 组件类名称，
     class: "@pgo/Client/Http/Client"
     # 是否验证https证书，默认否
     verifyPeer: false
@@ -17,6 +17,15 @@ http:
     userAgent: "PGO Framework"
     # 默认超时时间
     timeout: "10s"
+```
+
+## 功能列表
+
+```go
+httpClient.Get()     // 执行GET操作
+httpClient.Post()    // 执行POST操作
+httpClient.Do()      // 执行自定义请求
+httpClient.DoMulti() // 执行并行请求
 ```
 
 ## 使用示例

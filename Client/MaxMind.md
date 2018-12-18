@@ -23,12 +23,18 @@ type Geo struct {
 }
 ```
 
+## 功能列表
+
+```go
+mmd.GeoByIp()	// 根据IP查询GEO信息
+```
+
 ## 配置文件
 
 ```yaml
 # 组件ID，默认maxMind，国家、城市数据文件至少需要设置一个
 maxMind:
-	# 组件类名称
+    # 组件类名称
     class: "@pgo/Client/MaxMind/Client"
     # 国家数据文件(只包含国家数据，文件5M左右)
     countryFile: "@app/conf/GeoLite2-Country.mmdb"

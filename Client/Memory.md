@@ -7,7 +7,7 @@ Memory组件为进程内的内存缓存，使用上同memcache/redis缓存一致
 ```yaml
 # 组件ID，默认为"memory"
 memory:
-	# 组件类名称
+    # 组件类名称
     class: "@pgo/Client/Memory/Client"
     # GC间隔，默认60秒
     # gcInterval: "60s"
