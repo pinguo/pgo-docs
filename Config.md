@@ -21,7 +21,7 @@ conf/
     │   ├── app.yaml	# 生产环境app配置(递归合并到基础配置中)
     │   └── params.yaml
     ├── testing-dev/    # 开发测试配置目录
-    ├── testing-qa/	    # QA测试配置目录
+    ├── testing-qa/     # QA测试配置目录
     ├── development/	# 本地开发配置目录
     ├── app.yaml        # 项目基础配置文件
     └── params.yaml     # 自定义基础配置文件(自定义文件可任意添加)
