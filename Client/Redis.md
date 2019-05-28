@@ -1,29 +1,34 @@
 # Redis
 
-Redis组件提供了redis客户端的功能，数据在多个server间按一致性hash分布，支持连接池，支持数据的自动序列化，如果key未明确指定过期时间，则默认过期时间为1天。
+Redis组件提供了redis客户端的功能.支持连接池，支持数据的自动序列化，支持故障自动转移，除Do方法以外如果key未明确指定过期时间，则默认过期时间为1天。
+    
+    1. cluster,数据在多个server间按一致性hash分布。
+    2. masterSlave,写命令使用master，读命令在有slave的情况下，选用slave机器。
 
 ## 配置文件
 
 ```yaml
-# 组件ID，默认为"redis"
-redis:
+    # 组件ID，默认为"redis"
+    redis:
     # 组件类名称
     class: "@pgo/Client/Redis/Client"
     # KEY前缀，默认"pgo_"
-    # prefix: "pgo_"
+     prefix: "pgo_"
     # 连接密码，默认为空
-    # password: ""
+     password: ""
     # 使用DB的序号，默认为0
-    # db: 0
+     db: 0
     # 每个地址最大空闲连接数，默认为10
-    # maxIdleConn: 10
+     maxIdleConn: 10
     # 连接空闲时间(在这个时间内再次进行操作不需要进行探活)，默认1分钟
-    # maxIdleTime: "60s"
+     maxIdleTime: "60s"
     # 网络超时(连接、读写等)，默认1秒
-    # netTimeout: "1s"
+     netTimeout: "1s"
     # 服务器探活间隔(自动剔除和添加server)，默认关闭
-    # probInterval: "0s"
-    # 服务器地址，如果server有权重，请自行按比例添加
+     probInterval: "0s"
+    # 模式,是cluster还是masterSlave,默认cluster 可选值：cluster/masterSlave
+     mod:cluster
+    # 服务器地址，如果server有权重，请自行按比例添加,如果是master 最好配置在第一个
     servers:
         - "127.0.0.1:6379"
         - "127.0.0.1:6380"
@@ -42,6 +47,7 @@ redis.Del(key)                 // 删除key的值
 redis.MDel(keys)               // 并行删除多个key的值
 redis.Exists(key)              // 判断key是否存在
 redis.Incr(key1, delta)        // 累加key的值
+redis.Do(key1, delta)          // 可以使用更多的读写命令
 
 // TODO 其它非cache功能
 ```

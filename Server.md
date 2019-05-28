@@ -38,6 +38,10 @@ server:
 
     # 插件列表，默认["gzip"]
     # plugins: ["gzip"]
+    
+    # 提交body 限制，默认为go限制
+    # maxPostBodySize:int64 
+    
 ```
 
 ## 插件说明
