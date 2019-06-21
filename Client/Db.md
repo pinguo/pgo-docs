@@ -23,6 +23,10 @@ db:
     # slaves: ["slave1 dsn", "slave2 dsn"]
     # 最大空闲连接数(默认5)
     # maxIdleConn: 5
+    # 数据库建立连接的最大数目(默认0 无限制)
+    # maxOpenConn: 0
+    # 是完整的记录sql日志，且记录耗时(默认false 只记录执行方法和耗时)
+    # sqlLog:true
     # 最大连接维持时间(默认1小时)
     # maxConnTime: "1h"
     # 慢日志最小时间(默认100ms)
