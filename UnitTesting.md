@@ -34,9 +34,10 @@ arr_test_path_dir_name=(
 ```go
 1.如果不涉及GetObject使用，请按常规方法编写
 2.涉及GetObject使用:
-     UnitTesting.TestObj.GetObject("Lib/Ddd").(*Ddd) // 全局变量
+    
+     UnitTesting.TestObj.GetObject("Lib/Ddd").(*Ddd) // UnitTesting.TestObj全局变量
      或
-     UnitTesting.GetTestObj().GetObject("Service/Aaa").(*Aaa) // 每次初始化一个对象 
+     UnitTesting.GetTestObj().GetObject("Service/Aaa").(*Aaa) // UnitTesting.GetTestObj()每次初始化一个对象 
 ```
 
 
