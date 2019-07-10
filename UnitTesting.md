@@ -34,10 +34,27 @@ arr_test_path_dir_name=(
 ```go
 1.如果不涉及GetObject使用，请按常规方法编写
 2.涉及GetObject使用:
-    
-     UnitTesting.TestObj.GetObject("Lib/Ddd").(*Ddd) // UnitTesting.TestObj全局变量
-     或
-     UnitTesting.GetTestObj().GetObject("Service/Aaa").(*Aaa) // UnitTesting.GetTestObj()每次初始化一个对象 
+    // Lib包
+    func TestDdd_GetName(t *testing.T) {
+        // UnitTesting.TestObj全局变量
+        ddd:= UnitTesting.TestObj.GetObject("Lib/Ddd").(*Ddd)
+        ret := ddd.GetName()
+        if ret!="ddd"{
+           t.FailNow()
+        }
+        t.Log("ok:")
+    }
+
+    // Service包
+     func TestAaa_a1(t *testing.T)  {
+         // UnitTesting.GetTestObj()每次初始化一个对象 
+         aaa:= UnitTesting.GetTestObj().GetObject("Service/Aaa").(*Aaa)
+         ret := aaa.a1()
+         if ret!="aaa"{
+             t.FailNow()
+         }
+         t.Log("ok:")
+     } 
 ```
 
 
