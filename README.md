@@ -25,4 +25,5 @@ PGO应用框架即"Pinguo GO application framework"，是Camera360广告服务�
     * [Memory](Client/Memory.md)
     * [Mongo](Client/Mongo.md)
     * [Redis](Client/Redis.md)
+    * [RabbitMq](Client/RabbitMq.md)
 * [单元测试](UnitTesting.md)
