@@ -6,7 +6,7 @@ RabbitMq组件提供了RabbitMq客户端的功能.支持Channel连接池，支�
 
 ```yaml
 components:
-    # 组件ID，默认为"redis"
+    # 组件ID，默认为"rabbitMq"
     rabbitMq:
         # 组件类名称,不能为空
         class: "@pgo/Client/RabbitMq/Client" 
@@ -80,6 +80,10 @@ func (r *RabbitController) ActionPublish() {
 
 // curl -v http://127.0.0.1:8000/rabbit/consummer
 func (r *RedisController) ActionConsummer() {
+    type pubData struct {
+            Id int
+            Name string
+        }
     //获取rabbitMq上下文适配对象
     rabbit :=t.GetObject(RabbitMq.AdapterClass).(*RabbitMq.Adapter)
     opCodes := []string{"test"}
