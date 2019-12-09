@@ -5,18 +5,18 @@ Mongo组件是对`github.com/globalsign/mgo`的封装，更多文档请参见[mg
 ## 配置文件
 
 ```yaml
-# 组件ID，默认为"mongo"
-mongo:
-    # 组件类名称
-    class: "@pgo/Client/Mongo/Client"
-    # mongo地址
-    dsn: "mongodb://host1:port1/[db][?options]"
-    # 连接超时，默认1秒
-    # connectTimeout: "1s"
-    # 读取超时，默认10秒
-    # readTimeout: "10s"
-    # 写入超时，默认10秒
-    # writeTimeout: "10s"
+app.yaml
+components:
+    # 组件ID，默认为"mongo"
+    mongo:
+        # mongo地址
+        dsn: "mongodb://host1:port1/[db][?options]"
+        # 连接超时，默认1秒
+        # connectTimeout: "1s"
+        # 读取超时，默认10秒
+        # readTimeout: "10s"
+        # 写入超时，默认10秒
+        # writeTimeout: "10s"
 ```
 
 其中`dsn`配置字段参考[mgo.Dial()](https://godoc.org/github.com/globalsign/mgo#Dial)。默认的dsn参数：
@@ -59,10 +59,10 @@ mongo.MapReduce()      // 进行mapreduce计算并获取所有结果
 // curl -v http://127.0.0.1:8000/mongo/insert
 func (m *MongoController) ActionInsert() {
     // 获取mongo的上下文适配对象
-    mongo := m.GetObject(Mongo.AdapterClass, "test", "test").(*Mongo.Adapter)
+    mongo := m.GetObj(adapter.NewMongo(), "test", "test").(*adapter.Mongo)
 
     // 通过map插入
-    doc1 := pgo.Map{"f1": "val1", "f2": true, "f3": 99}
+    doc1 := pgo2.Map{"f1": "val1", "f2": true, "f3": 99}
     err := mongo.InsertOne(doc1)
     fmt.Println("insert one doc1:", err)
 
@@ -93,7 +93,7 @@ func (m *MongoController) ActionInsert() {
 // curl -v http://127.0.0.1:8000/mongo/update
 func (m *MongoController) ActionUpdate() {
     // 获取mongo的上下文适配对象
-    mongo := m.GetObject(Mongo.AdapterClass, "test", "test").(*Mongo.Adapter)
+    mongo := m.GetObj(adapter.NewMongo(), "test", "test").(*adapter.Mongo)
 
     // 更新单个文档
     query := bson.M{"f1": "val1"}
@@ -117,7 +117,7 @@ func (m *MongoController) ActionUpdate() {
 // curl -v http://127.0.0.1:8000/mongo/query
 func (m *MongoController) ActionQuery() {
     // 获取mongo的上下文适配对象
-    mongo := m.GetObject(Mongo.AdapterClass, "test", "test").(*Mongo.Adapter)
+    mongo := m.GetObj(adapter.NewMongo(), "test", "test").(*adapter.Mongo)
 
     // 查询单个文档(未指定结果类型，结果为bson.M)
     var v1 interface{}
@@ -125,7 +125,7 @@ func (m *MongoController) ActionQuery() {
     fmt.Println("query one f1==val1:", v1, err)
 
     // 查询单个文档(结果类型为map)
-    var v2 pgo.Map
+    var v2 pgo2.Map
     err = mongo.FindOne(bson.M{"f1": "val2"}, &v2)
     fmt.Println("query one f1==val2:", v2, err)
 
@@ -140,7 +140,7 @@ func (m *MongoController) ActionQuery() {
     fmt.Println("query one f1==val3:", v3, err)
 
     // 查询多个文档(指定结果为map)
-    var docs []pgo.Map
+    var docs []pgo2.Map
     err = mongo.FindAll(bson.M{"f3": bson.M{"$gte": 6}}, &docs)
     fmt.Println("query all f3>=6:", docs, err)
 }

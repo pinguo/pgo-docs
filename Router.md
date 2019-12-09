@@ -2,8 +2,7 @@
 Router处理URL到Controller/Action的路径映射，支持url路由和正则路由。
 
 route和controller/action的映射规则：
-- route的最后一段为action名称，不存在则为index
-- route的其余部分为controller名称，不存在则为index
+- 当route等于"/" 时 ，默认查找index/index 
 
 例如：/path/to/welcome/say-hello，controller类名为Controller/Path/To/WelcomeController, action方法为ActionSayHello.
 
@@ -13,7 +12,7 @@ url路由通过url直接映射，映射规则为将'/'和'-'后面的第一个�
 ## 正则路由
 指定正则表达式来匹配路由对应的url，支持参数捕获，捕获的参数按序通过Action方法的参数进行传递。
 
-路由规则可以通过配置文件(app.router.rules)进行配置，也可以在pgo.Run()调用前通过代码配置。
+路由规则可以通过配置文件(app.router.rules)进行配置，也可以在pgo2.Run()调用前通过代码配置。
 
 文件配置:
 ```yaml
@@ -28,9 +27,9 @@ router:
 代码配置：
 ```go
 // 添加正则路由
-router := pgo.App.GetRouter()
+router := pgo2.App().Router()
 router.AddRoute(`^/foo/all$`, "/foo/index")
 router.AddRoute(`^/api/user/(\d+)$`, "/api/user")
 
-pgo.Run() // 开始服务
+pgo2.Run() // 开始服务
 ```

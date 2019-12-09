@@ -7,16 +7,17 @@ HTTP组件是对GO内置net/http包的Client组件封装，增加组件配置、
 ## 配置文件
 
 ```yaml
-# 组件ID，默认为http，http做为核心组件，一般不用自行设置
-http:
-    # 组件类名称，
-    class: "@pgo/Client/Http/Client"
-    # 是否验证https证书，默认否
-    verifyPeer: false
-    # 默认User-Agent
-    userAgent: "PGO Framework"
-    # 默认超时时间
-    timeout: "10s"
+app.yaml
+
+components:
+    # 组件ID，默认为http，http做为核心组件，一般不用自行设置
+    http:
+        # 是否验证https证书，默认否
+        verifyPeer: false
+        # 默认User-Agent
+        userAgent: "PGO Framework"
+        # 默认超时时间
+        timeout: "10s"
 ```
 
 ## 功能列表
@@ -34,7 +35,7 @@ httpClient.DoMulti() // 执行并行请求
 // curl -v http://127.0.0.1：8000/http-client/send-query
 func (h *HttpClientController) ActionSendQuery() {
     // 获取http的上下文适配对象
-    httpClient := h.GetObject(Http.AdapterClass).(*Http.Adapter)
+    httpClient := h.GetObj(adapter.NewHttp()).(*adapter.Http)
 
     // 简单GET请求
     url := "http://127.0.0.1:3000/get.php"
@@ -45,7 +46,7 @@ func (h *HttpClientController) ActionSendQuery() {
     }
 
     // 带参数GET请求
-    params := pgo.Map{"p1": "v1", "p2": 10, "p3": 9.9}
+    params := pgo2.Map{"p1": "v1", "p2": 10, "p3": 9.9}
     if res := httpClient.Get(url, params); res != nil {
         defer res.Body.Close()
         content, _ := ioutil.ReadAll(res.Body)
@@ -66,11 +67,11 @@ func (h *HttpClientController) ActionSendQuery() {
 // curl -v http://127.0.0.1:8000/http-client/send-form
 func (h *HttpClientController) ActionSendForm() {
     // 获取http的上下文适配对象
-    httpClient := h.GetObject(Http.AdapterClass).(*Http.Adapter)
+    httpClient := h.GetObj(adapter.NewHttp()).(*adapter.Http)
 
     // 发送POST请求
     url := "http://127.0.0.1:3000/form.php"
-    form := pgo.Map{"p1": "v1", "p2": 10, "p3": 9.9}
+    form := pgo2.Map{"p1": "v1", "p2": 10, "p3": 9.9}
     if res := httpClient.Post(url, form); res != nil {
         defer res.Body.Close()
         content, _ := ioutil.ReadAll(res.Body)
@@ -81,7 +82,7 @@ func (h *HttpClientController) ActionSendForm() {
 // curl -v http://127.0.0.1:8000/http-client/send-file
 func (h *HttpClientController) ActionSendFile() {
     // 获取http的上下文适配对象
-    httpClient := h.GetObject(Http.AdapterClass).(*Http.Adapter)
+    httpClient := h.GetObj(adapter.NewHttp()).(*adapter.Http)
 
     // 上传文件的POST请求
     url := "http://127.0.0.1:3000/file.php"
@@ -112,7 +113,7 @@ func (h *HttpClientController) ActionSendFile() {
 // curl -v http://127.0.0.1:8000/http-client/multi-request
 func (h *HttpClientController) ActionMultiRequest() {
     // 获取http的上下文适配对象
-    httpClient := h.GetObject(Http.AdapterClass).(*Http.Adapter)
+    httpClient := h.GetObj(adapter.NewHttp()).(*adapter.Http)
 
     req1, _ := http.NewRequest("GET", "http://127.0.0.1:3000/get1.php", nil)
     req2, _ := http.NewRequest("GET", "http://127.0.0.1:3000/get2.php", nil)

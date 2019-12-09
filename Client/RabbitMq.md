@@ -3,13 +3,11 @@
 RabbitMq组件提供了RabbitMq客户端的功能.支持Channel连接池，支持数据的gob序列化，支持故障自动转移,恢复,探测.
 一个server地址对应一个tcp长链接，一个tcp链接对应一个Channel连接池
 ## 配置文件
-
+app.yaml
 ```yaml
 components:
     # 组件ID，默认为"rabbitMq"
     rabbitMq:
-        # 组件类名称,不能为空
-        class: "@pgo/Client/RabbitMq/Client" 
         # 用户
         user: ""
         # 密码
@@ -66,7 +64,7 @@ func (r *RabbitController) ActionPublish() {
         Name string
     }
     //获取rabbitMq上下文适配对象
-    rabbit :=t.GetObject(RabbitMq.AdapterClass).(*RabbitMq.Adapter)
+    rabbit :=t.GetObj(adapter.NewRabbitMq()).(*adapter.RabbitMq)
     // 定义交换机,这里可以不用定义，那consumme需要先执行
     rabbit.ExchangeDeclare()
     // 发布消息
@@ -85,7 +83,7 @@ func (r *RedisController) ActionConsummer() {
             Name string
         }
     //获取rabbitMq上下文适配对象
-    rabbit :=t.GetObject(RabbitMq.AdapterClass).(*RabbitMq.Adapter)
+    rabbit :=t.GetObj(adapter.NewRabbitMq()).(*adapter.RabbitMq)
     opCodes := []string{"test"}
     // 此程序为常驻程序，会一直监听消息,最好为脚本运行
     rets :=rabbit.Consume("testQueue",opCodes,1,false,false,false)

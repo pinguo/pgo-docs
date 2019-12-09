@@ -6,13 +6,14 @@
 - 支持参数验证(详见ValidateXxx方法)
 - 支持BeforeAction/AfterAction钩子
 - 支持HandlePanic钩子，捕获未处理异常
-- 提供OutputXxx方法，方便输出各种类型数据
+- 提供Json,Jsonp,Data,Xml,ProtoBuf方法，方便输出各种类型数据
+- 提供自定义数据类型输出方法Render
 
 由于控制器是请求的入口，需要在main包中手动导入，为方便起见，建议不论Controller层有多深统一在Controller或Command包的init方法中注册。
 
-HTTP控制器位于`src/Controller`目录下，类后后缀为`Controller`。
+HTTP控制器位于`pkg/controller`目录下，类后后缀为`Controller`。
 
-命令控制器位于`src/Command`目录下，类后缀为`Command`，运行命令控制器需要通过`--cmd`选项指定，例如：`bin/pgo-demo --cmd /test/index`。
+命令控制器位于`pkg/command`目录下，类后缀为`Command`，运行命令控制器需要通过`--cmd`选项指定，例如：`bin/pgo-demo --cmd /test/index`。
 
 ## 使用示例
 
@@ -21,12 +22,12 @@ package Controller
 
 import (
     "net/http"
-    "github.com/pinguo/pgo"
+    "github.com/pinguo/pgo2"
 )
 
 // 定义HTTP控制器
 type WelcomeController struct {
-    pgo.Controller	// 继承于框架基类
+    pgo2.Controller	// 继承于框架基类
 }
 
 // 可选构造函数(框架自动调用)
@@ -54,8 +55,8 @@ func (w *WelcomeController) HandlePanic(v interface{}) {
 
 // 默认动作为index, 通过/welcome或/welcome/index调用
 func (w *WelcomeController) ActionIndex() {
-    data := pgo.Map{"text": "welcome to pgo-demo", "now": time.Now()}
-    w.OutputJson(data, http.StatusOK)
+    data := pgo2.Map{"text": "welcome to pgo-demo", "now": time.Now()}
+    w.Json(data, http.StatusOK)
 }
 
 // URL路由动作，根据url自动映射控制器及方法，不需要配置.
@@ -64,7 +65,7 @@ func (w *WelcomeController) ActionIndex() {
 // 例如：/welcome/say-hello，控制器类名为
 // Controller/WelcomeController 动作方法名为ActionSayHello
 func (w *WelcomeController) ActionSayHello() {
-    ctx := w.GetContext() // 获取PGO请求上下文件
+    ctx := w.Context() // 获取PGO请求上下文件
 
     // 验证参数，提供参数名和默认值，当不提供默认值时，表明该参数为必选参数。
     // 详细验证方法参见Validate.go
@@ -85,27 +86,27 @@ func (w *WelcomeController) ActionSayHello() {
     svc.SayHello(name, age, ip)
     ctx.ProfileStop("Welcome.SayHello")
 
-    data := pgo.Map{
+    data := pgo2.Map{
         "name": name,
         "age": age,
         "ip": ip,
     }
 
     // 输出json数据
-    w.OutputJson(data, http.StatusOK)
+    w.Json(data, http.StatusOK)
 }
 
 // 正则路由动作，需要配置Router组件(components.router.rules)
 // 规则中捕获的参数通过动作函数参数传递，没有则为空字符串.
 // eg. "^/reg/eg/(\\w+)/(\\w+)$ => /welcome/regexp-example"
 func (w *WelcomeController) ActionRegexpExample(p1, p2 string) {
-    data := pgo.Map{"p1": p1, "p2": p2}
-    w.OutputJson(data, http.StatusOK)
+    data := pgo2.Map{"p1": p1, "p2": p2}
+    w.Json(data, http.StatusOK)
 }
 
 // RESTFULL动作，url中没有指定动作名，使用请求方法作为动作的名称(需要大写)
 // 例如：GET方法请求ActionGET(), POST方法请求ActionPOST()
 func (w *WelcomeController) ActionGET() {
-    w.GetContext().End(http.StatusOK, []byte("call restfull GET"))
+    w.Context().End(http.StatusOK, []byte("call restfull GET"))
 }
 ```

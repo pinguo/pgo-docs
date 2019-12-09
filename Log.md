@@ -6,6 +6,11 @@
 
 在没有任何配置的情况下，日志组件会将所有级别的日志输出到控制台。
 
+## 自定义
+## pgo2.App().Log().SetTarget(name string, target ITarget) // (可选)自定义日志目标类
+
+## pgo2.App().Log().Target.SetFormatter(format IFormatter) // (可选) 自定义日志格式
+
 ## 配置文件
 ```yaml
 # app.components.log
@@ -27,13 +32,10 @@ log:
         # 信息日志
         info:
             # 文件输出
-            class: "@pgo/FileTarget"
+            class: "file"
 
             # 处理的日志级别
             levels: "DEBUG,INFO,NOTICE"
-
-            # 指定日志格式器，通常不指定，使用内置
-            # formatter: "Lib/PGLogFormatter"
 
             # 日志文件路径，支持别名
             filePath: "@runtime/info.log"
@@ -52,7 +54,7 @@ log:
 
         # 错误日志
         error:
-            class: "@pgo/FileTarget"
+            class: "file"
             levels: "WARN,ERROR,FATAL"
             filePath: "@runtime/error.log"
             maxLogFile: 10
@@ -60,20 +62,20 @@ log:
 
         # 控制台日志
         console:
-            class: "@pgo/ConsoleTarget"
+            class: "console"
             levels: "ALL"
 ```
 
 ## 全局日志
 
-全局日志对象通过`pgo.GLogger()`获取，全局日志对象只在没有上下文的组件中使用，通常建议在组件中使用panic将错误信息抛出来，由相应的请求对象来记录日志，这样会带上请求ID，方便调试。
+全局日志对象通过`pgo2.GLogger()`获取，全局日志对象只在没有上下文的组件中使用，通常建议在组件中使用panic将错误信息抛出来，由相应的请求对象来记录日志，这样会带上请求ID，方便调试。
 
 示例：
 ```go
-pgo.GLogger().Debug("debug log")
-pgo.GLogger().Info("info log, timeRun:%s", pgo.TimeRun().String())
-pgo.GLogger().Warn("warn log, err:%s", err.Error())
-pgo.GLogger().Error("error log, err:%s", err.Error())
+pgo2.GLogger().Debug("debug log")
+pgo2.GLogger().Info("info log, timeRun:%s", pgo2.TimeRun().String())
+pgo2.GLogger().Warn("warn log, err:%s", err.Error())
+pgo2.GLogger().Error("error log, err:%s", err.Error())
 ```
 
 ## 上下文日志
@@ -81,7 +83,7 @@ pgo.GLogger().Error("error log, err:%s", err.Error())
 
 示例：
 ```go
-ctx := this.GetContext()
+ctx := this.Context()
 ctx.Info("info log in context, args:%v", args)
 ctx.Error("error log in context, err:%s", err.Error())
 

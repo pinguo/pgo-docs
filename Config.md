@@ -1,10 +1,14 @@
 # 配置组件(Config)
 用于管理应用程序的配置文件，支持全局配置和环境配置，支持yaml和json配置文件，推荐使用yaml配置文件以支持注释等特性。
+用户可以自定义Config组件
+pg2.App().SetConfig(config config.IConfig) // (可选)配置组件  
+
+pg2.App().Config().AddParser(ext string, parser IConfigParser) // (可选)自定义配置解析器 根据后缀自动选择
 
 用户可以自行添加特定文件后缀的配置文件解析器，参见Config.AddParser().
 
 说明：
-- 配置文件根目录为`@app/conf`，根目录下支持环境目录，如：production, dev, qa等
+- 配置文件根目录为`@app/configs`，根目录下支持环境目录，如：production, dev, qa等
 - 应用配置为`app.yaml`，可任意添加自定义配置文件， 如：`params.yaml`
 - 运行程序时通过`--env production`指定环境目录为`production`
 - 环境目录中的配置会递归合并到全局配置中
@@ -16,7 +20,7 @@
 典型的配置目录结构如下：
 
 ```sh
-conf/
+configs/
     ├── production/     # 生产环境配置目录
     │   ├── app.yaml	# 生产环境app配置(递归合并到基础配置中)
     │   └── params.yaml
@@ -30,7 +34,7 @@ conf/
 ## 使用示例
 
 ```go
-cfg := pgo.App.GetConfig() // 获取配置对象
+cfg := pgo2.App().Config() // 获取配置对象
 name := cfg.GetString("app.name", "demo") // 获取String，不存在返回"demo"
 procs := cfg.GetInt("app.GOMAXPROCS", 2) // 获取Integer, 不存在返回2
 price := cfg.GetFloat("params.goods.price", 0) // 获取Float, 不存在返回0
