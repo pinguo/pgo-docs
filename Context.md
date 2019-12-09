@@ -2,7 +2,7 @@
 
 - 上下文存在于一个请求的生命周期中
 - 包含一个请求的上下文信息(输入、输出、自定义数据)
-- 继承pgo.Object的类通过pgo.Object.GetObject()会自动注入当前上下文
+- 继承pgo2.Object的类通过pgo2.Object.GetObj()会自动注入当前上下文
 
 请求结束后默认会输出请求访问日志，如果不希望输出访问日志或想输出自定义格式的访问日志可以通过设置`app.server.enableAccessLog`为false来关闭。
 
@@ -13,25 +13,28 @@
 ctx := this.GetContext()
 
 // 获取请求数据
-ctx.GetParam("p1", "")  // 获取GET/POST参数，默认空串
-ctx.GetParamAll()		// 获取所有GET/POST参数
-ctx.GetQuery("p2", "")  // 获取GET参数，默认空串
-ctx.GetQueryAll()		// 获取所有GET参数
-ctx.GetPost("p3", "")   // 获取POST参数，默认空串
-ctx.GetPostAll()		// 获取所有POST参数
-ctx.GetHeader("h1", "") // 获取Header，默认空串
-ctx.GetHeaderAll()		// 获取所有Header
-ctx.GetCookie("c1", "") // 获取Cookie，默认空串
-ctx.GetCookieAll()		// 获取所有Cookie
-ctx.GetParamMap("p4")	// 获取GET/POST中p4[k1]=xx&p4[k2]=xx类型参数
-ctx.GetQueryMap("p5")	// 获取GET中p5[k1]=xx&p5[k2]=xx类型参数
-ctx.GetPostMap("p6")	// 获取POST中p6[k1]=xx&p6[k2]=xx类型参数
+ctx.Param("p1", "")  // 获取GET/POST参数，默认空串
+ctx.ParamAll()		// 获取所有GET/POST参数
+ctx.Query("p2", "")  // 获取GET参数，默认空串
+ctx.QueryAll()		// 获取所有GET参数
+ctx.Post("p3", "")   // 获取POST参数，默认空串
+ctx.PostAll()		// 获取所有POST参数
+ctx.Header("h1", "") // 获取Header，默认空串
+ctx.HeaderAll()		// 获取所有Header
+ctx.Cookie("c1", "") // 获取Cookie，默认空串
+ctx.CookieAll()		// 获取所有Cookie
+ctx.ParamMap("p4")	// 获取GET/POST中p4[k1]=xx&p4[k2]=xx类型参数
+ctx.QueryMap("p5")	// 获取GET中p5[k1]=xx&p5[k2]=xx类型参数
+ctx.PostMap("p6")	// 获取POST中p6[k1]=xx&p6[k2]=xx类型参数
+ctx.QueryArray("p7") // 获取GET/POST中p7[]=v1&p7[]=v2类型参数
+ctx.ParamArray("p7") // 获取GET中p7[]=v1&p7[]=v2类型参数
+ctx.PostArray("p7") // 获取POST中p7[]=v1&p7[]=v2类型参数
 
-ctx.GetPath()           // 获取请求路径
-ctx.GetClientIp()       // 获取客户端IP
+ctx.Path()           // 获取请求路径
+ctx.ClientIp()       // 获取客户端IP
 
 ctx.SetUserData("u1", "v1") // 设置自定义数据
-ctx.GetUserData("u1", "")   // 获取自定义数据
+ctx.UserData("u1", "")   // 获取自定义数据
 
 // 验证请求参数
 ctx.ValidateParam("p1", "").Do()    // 获取并验证GET/POST参数(有默认值)
@@ -52,6 +55,6 @@ ctx.ProfileStart/ProfileStop/ProfileAdd()   // 记录耗时数据
 ctx.Next()			// 等待后续插件链处理完毕
 ctx.Abort()			// 结束插件链处理并退出
 ctx.Copy()			// 复制当前上下文
-ctx.GetElapseMs()	// 获取当前请求耗时
-ctx.GetLogId()		// 获取当前请求日志ID
+ctx.ElapseMs()	// 获取当前请求耗时
+ctx.LogId()		// 获取当前请求日志ID
 ```

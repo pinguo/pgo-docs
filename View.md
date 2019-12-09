@@ -20,13 +20,13 @@ view:
 
 ```go
 // 渲染并输出到stdout
-pgo.App.GetView().Display(os.Stdout, "hello.html", pgo.Map{"name": "tom", "age": 25})
+pgo2.App().View().Display(os.Stdout, "hello.html", pgo2.Map{"name": "tom", "age": 25})
 
 // 渲染并获取输出bytes
-data := pgo.App.GetView().Render("hello.html", pgo.Map{"name": "tom", "age": 25})
+data := pgo2.App().View().Render("hello.html", pgo2.Map{"name": "tom", "age": 25})
 
 // 控制器中渲染并输出
-ctr.OutputView("hello.html", pgo.Map{"name": "tom", "age": 25})
+ctr.View("hello.html", pgo2.Map{"name": "tom", "age": 25})
 ```
 
 

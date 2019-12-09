@@ -1,5 +1,5 @@
 # 核心应用(Application)
-Application是PGO的应用对象，其全局实例pgo.App是框架初始化的第一个对象，通过pgo.App可以访问到框架的所有组件。
+Application是PGO的应用对象，其全局实例pgo2.App是框架初始化的第一个对象，通过pgo2.App可以访问到框架的所有组件。
 
 ## 配置文件
 Application的配置文件即是整个程序的配置文件(conf/app.yaml)，通过配置文件可以对Application及所有其它组件进行配置。文件格式：
@@ -47,24 +47,25 @@ components:
 ```
 
 ## 初始化流程：
-1. 导入PGO
-    - 在main包中通过`import "github.com/pinguo/pgo"`导入pgo
-    - 执行pgo的init函数，构造并初始化App的属性
+1. 导入PGO2
+    - 在main包中通过`import "github.com/pinguo/pgo2"`导入pgo2
+    - 执行pgo2的init函数，构造并初始化App的属性
     - 初始化config, container, server三个核心组件
     - 添加核心组件的默认配置
     - 注册路由、日志等核心组件
 2. 调用App及其组件的方法，定制化各种组件，如添加自定义路由规则等，通常这不需要执行，应该通过配置文件进行配置。
-3. 调用pgo.Run()，启动http服务或处理command命令
+3. 调用pgo2.Run()，启动http服务或处理command命令
 
 ## 组件
 每个组件都是全局单例对象，在第一次使用时自动构造、配置和初始化，通常在配置文件中指定组件配置。
+也可以在main.go中自定义
 
 示例：
 
 ```yaml
-# 日志组件配置(app.components.log)，组件必须包含class字段，
-# 核心组件的class由框架设置，eg. log组件为"@pgo/Log"，
-# 核心组件通过框架提供的方法获取，eg. log := pgo.App.GetLog()
+# 日志组件配置(app.components.log)，
+# 核心组件的class由框架设置，eg. log组件为"@pgo2/Log"，
+# 核心组件通过框架提供的方法获取，eg. log := pgo2.App().GetLog()
 log:
     levels: "ALL"
     traceLevels: "DEBUG"
@@ -72,13 +73,11 @@ log:
     flushInterval: "60s"
     targets:
         info:
-            class: "@pgo/FileTarget"
             levels: "DEBUG,INFO,NOTICE"
             filePath: "@runtime/info.log"
             maxLogFile: 10
             rotate: "daily"
-        error: {
-            class: "@pgo/FileTarget"
+        error: 
             levels: "WARN,ERROR,FATAL"
             filePath: "@runtime/error.log"
             maxLogFile: 10
@@ -88,9 +87,8 @@ log:
 ```yaml
 # redis组件(app.components.redis)，
 # 获取非核心组件需要进行类型转换，例如：
-# redis := pgo.App.Get("redis").(*Redis.Client)
+# redis := pgo2.App().Component("redis", redis.New).(*Redis.Client)
 redis:
-    class: "@pgo/Client/Redis/Client"
     prefix: "pgo_"
     password: ""
     db: 0
@@ -106,15 +104,14 @@ redis:
 框架定义的核心组件如下：
 ```go
 map[string]string{
-    "router": "@pgo/Router",        // 路由组件
-    "log":    "@pgo/Log",           // 日志组件
-    "status": "@pgo/Status",        // 状态码组件
-    "i18n":   "@pgo/I18n",          // 国际化组件
-    "view":   "@pgo/View",          // 视图组件
-    "gzip":   "@pgo/Gzip",          // Gzip组件
-    "file":   "@pgo/File",          // 静态文件组件
+    "router": "@pgo2/Router",        // 路由组件
+    "log":    "@pgo2/Log",           // 日志组件
+    "status": "@pgo2/Status",        // 状态码组件
+    "i18n":   "@pgo2/I18n",          // 国际化组件
+    "view":   "@pgo2/View",          // 视图组件
+    "gzip":   "@pgo2/Gzip",          // Gzip组件
+    "file":   "@pgo2/File",          // 静态文件组件
 
-    "http": "@pgo/Client/Http/Client",
 }
 ```
 
@@ -123,13 +120,13 @@ map[string]string{
 - `@app` 项目根目录绝对路径
 - `@runtime` 项目运行时目录绝对路径
 - `@view` 项目视图模板目录绝对路径
-- `@pgo` PGO框架import路径
+- `@pgo2` PGO框架import路径
 
 使用SetAlias/GetAlias设置和解析别名字符串，例如：
 `GetAlias("@runtime/info.log")`会将@runtime替换成实际的运行目录
 
 ## 命令行参数
-- `--env production`, 指定程序的环境配置目录，默认为production
+- `--env production`, 指定程序的环境配置目录，默认为develop
 - `--cmd /foo/bar`, 指定程序为命令行模式，并运行指定命令，默认为WEB模式
 - `--base /base/path`, 指定基础目录，默认为项目根目录，通常在单测时需要指定
 

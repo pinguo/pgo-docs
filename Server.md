@@ -1,5 +1,5 @@
 # 服务器组件(Server)
-Server封装了命令行和HTTP的处理逻辑，实现了http.Handler接口和pgo.IPlugin接口，主要的逻辑实现在ServeCMD, ServeHTTP, HandleRequest三个函数中。
+Server封装了命令行和HTTP的处理逻辑，实现了http.Handler接口和pgo2.IPlugin接口，主要的逻辑实现在ServeCMD, ServeHTTP, HandleRequest三个函数中。
 
 Server支持SIGTERM/SIGINT信号的平滑关闭，默认每1分钟会输出程序状态到INFO日志中。
 
@@ -45,7 +45,7 @@ server:
 ```
 
 ## 插件说明
-插件必须实现pgo.IPlugin接口，插件配置为组件，并在server.plugins中添加，添加顺序为插件的调用顺序。
+插件必须实现pgo2.IPlugin接口，插件配置为组件，并在server.plugins中添加，添加顺序为插件的调用顺序。
 
 当不指定plugins时，插件列表默认包含gzip，若指定了plugins配置，但列表为空时，没有插件生效。
 

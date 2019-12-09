@@ -32,14 +32,15 @@ mmd.GeoByIp()	// 根据IP查询GEO信息
 ## 配置文件
 
 ```yaml
-# 组件ID，默认maxMind，国家、城市数据文件至少需要设置一个
-maxMind:
-    # 组件类名称
-    class: "@pgo/Client/MaxMind/Client"
-    # 国家数据文件(只包含国家数据，文件5M左右)
-    countryFile: "@app/conf/GeoLite2-Country.mmdb"
-    # 城市数据文件(包含省市等数据，文件50M左右)
-    cityFile: "@app/conf/GeoLite2-City.mmdb"
+app.yaml
+
+components:
+    # 组件ID，默认maxMind，国家、城市数据文件至少需要设置一个
+    maxMind: 
+        # 国家数据文件(只包含国家数据，文件5M左右)
+        countryFile: "@app/conf/GeoLite2-Country.mmdb"
+        # 城市数据文件(包含省市等数据，文件50M左右)
+        cityFile: "@app/conf/GeoLite2-City.mmdb"
 ```
 
 ## 使用示例
@@ -48,15 +49,15 @@ maxMind:
 // curl -v http://127.0.0.1:8000/max-mind/geo-by-ip
 func (m *MaxMindController) ActionGeoByIp() {
     // 获取要解析的IP地址
-    ip := m.GetContext().ValidateParam("ip", "182.150.28.13").Do()
+    ip := m.Context().ValidateParam("ip", "182.150.28.13").Do()
 
     // 获取MaxMind的上下文件适配对象
-    mmd := m.GetObject(MaxMind.AdapterClass).(*MaxMind.Adapter)
+    mmd := m.GetObj(adapter.NewMaxMind()).(*adapter.MaxMind)
 
     // 解析IP的geo信息
     geo := mmd.GeoByIp(ip)
 
-    m.OutputJson(geo, http.StatusOK)
+    m.Json(geo, http.StatusOK)
 }
 ```
 
