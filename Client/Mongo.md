@@ -36,6 +36,8 @@ components:
 ## 功能列表
 
 ```go
+NewMongo(db, coll string, componentId ...string) // 对象 this.GetObject(adapter.NewMongo(db, coll)).(adapter.IMongo)/(*adapter.Mongo)
+NewMongoPool(ctr iface.IContext, args ...interface{}) // 对象池 this.GetObjectPool(adapter.NewMongoPool,db, coll)).(adapter.IMongo)/(*adapter.Mongo)
 mongo.FindOne()        // 查找满足条件的单个文档
 mongo.FindAll()        // 查找满足条件的所有文档
 mongo.FindAndModify()  // 查找并更新

@@ -1,7 +1,7 @@
 # PGO参考文档
 PGO2应用框架即"Pinguo GO application framework 2.0"，是Camera360服务端团队在PGO基础研发的一款简单、高性能、组件化的GO应用框架
 
-本文档介绍PGO核心组件的概念、使用与原理，再结合[pgo2-demo](https://github.com/pinguo/pgo2-demo)项目，开发者就能够使用PGO轻松地开发出高性能的WEB应用程序。
+本文档介绍PGO2核心组件的概念、使用与原理，再结合[pgo2-demo](https://github.com/pinguo/pgo2-demo)项目，开发者就能够使用PGO2轻松地开发出高性能的WEB应用程序。
 
 # 目录
 * [框架概述(Overview)](Overview.md)

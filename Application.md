@@ -1,8 +1,8 @@
 # 核心应用(Application)
-Application是PGO的应用对象，其全局实例pgo2.App是框架初始化的第一个对象，通过pgo2.App可以访问到框架的所有组件。
+Application是PGO2的应用对象，其全局实例pgo2.App()是框架初始化的第一个对象，通过pgo2.App()可以访问到框架的所有组件。
 
 ## 配置文件
-Application的配置文件即是整个程序的配置文件(conf/app.yaml)，通过配置文件可以对Application及所有其它组件进行配置。文件格式：
+Application的配置文件即是整个程序的配置文件(configs/app.yaml)，通过配置文件可以对Application及所有其它组件进行配置。文件格式：
 ```yaml
 # 应用名称，默认为可执行程序名称
 name: "app-name"
@@ -89,7 +89,7 @@ log:
 # 获取非核心组件需要进行类型转换，例如：
 # redis := pgo2.App().Component("redis", redis.New).(*Redis.Client)
 redis:
-    prefix: "pgo_"
+    prefix: "pgo2_"
     password: ""
     db: 0
     maxIdleConn: 10
@@ -120,7 +120,7 @@ map[string]string{
 - `@app` 项目根目录绝对路径
 - `@runtime` 项目运行时目录绝对路径
 - `@view` 项目视图模板目录绝对路径
-- `@pgo2` PGO框架import路径
+- `@pgo2` PGO2框架import路径
 
 使用SetAlias/GetAlias设置和解析别名字符串，例如：
 `GetAlias("@runtime/info.log")`会将@runtime替换成实际的运行目录
@@ -129,5 +129,6 @@ map[string]string{
 - `--env production`, 指定程序的环境配置目录，默认为develop
 - `--cmd /foo/bar`, 指定程序为命令行模式，并运行指定命令，默认为WEB模式
 - `--base /base/path`, 指定基础目录，默认为项目根目录，通常在单测时需要指定
+- `--cmdList`, 显示所有命令，包括cmd参数列表 
 
 

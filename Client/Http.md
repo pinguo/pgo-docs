@@ -23,6 +23,8 @@ components:
 ## 功能列表
 
 ```go
+NewHttp(componentId ...string) // 对象 this.GetObj(adapter.NewHttp()).(adapter.IHttp)/(*adapter.Http)
+NewHttpPool(ctr *pgo2.Context, componentId ...interface{}) // 对象池 this.GetObjPool(adapter.NewHttpPool).(adapter.IHttp)/(*adapter.Http)
 httpClient.Get()     // 执行GET操作
 httpClient.Post()    // 执行POST操作
 httpClient.Do()      // 执行自定义请求

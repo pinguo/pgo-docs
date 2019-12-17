@@ -4,7 +4,7 @@ Router处理URL到Controller/Action的路径映射，支持url路由和正则路
 route和controller/action的映射规则：
 - 当route等于"/" 时 ，默认查找index/index 
 
-例如：/path/to/welcome/say-hello，controller类名为Controller/Path/To/WelcomeController, action方法为ActionSayHello.
+例如：/path/to/welcome/say-hello,/path/to/welcome/sayHello，controller类名为Controller/Path/To/WelcomeController, action方法为ActionSayHello.
 
 ## URL路由
 url路由通过url直接映射，映射规则为将'/'和'-'后面的第一个字母转换成大写，例如：`/api/foo-bar/say-hello => /Api/FooBar/SayHello`。

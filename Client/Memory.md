@@ -18,6 +18,8 @@ components:
 ## 功能列表
 
 ```go
+NewMemory(componentId ...string) // 对象 this.GetObj(adapter.NewMemory()).(adapter.IMemory)/(*adapter.Memory)
+NewMemoryPool(ctr iface.IContext, componentId ...interface{}) // 对象池 this.GetObjPool(adapter.NewMemoryPool).(adapter.IMemory)/(*adapter.Memory)
 mm.Get(key)          // 获取key的值
 mm.MGet(keys)        // 并行获取多个key的值
 mm.Set(key, val)     // 设置key的值
