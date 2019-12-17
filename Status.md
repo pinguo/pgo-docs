@@ -1,6 +1,6 @@
 # 状态码组件(Status)
 
-状态码组件用于集中管理接口的响应状态码，并且支持多语言。PGO建议接口只处理成功的响应，所有异常的响应通过pgo2.NewException(status)抛出来，由框架自动查询状态码及响应消息，并根据配置处理消息的国际化，以简化流程。
+状态码组件用于集中管理接口的响应状态码，并且支持多语言。PGO2建议接口只处理成功的响应，所有异常的响应通过perror.New(status)抛出来，由框架自动查询状态码及响应消息，并根据配置处理消息的国际化，以简化流程。
 
 状态码查找顺序：
 
@@ -44,10 +44,10 @@ func (t *WelcomeController) ActionIndex() {
 // 异常输出，由于框架处理处理
 func (t *WelcomeController) ActionError() {
     // 通过抛出异常的方式由框架自动处理状态码
-    panic(pgo2.NewException(1001))
+    panic(perror.New(1001))
     
     // 可以覆盖配置中的消息映射
-    panic(pgo2.NewException(1002, "another error message"))
+    panic(perror.New(1002, "another error message"))
 }
 ```
 

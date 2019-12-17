@@ -37,6 +37,8 @@ components:
 ## 功能列表
 
 ```go
+NewRedis(componentId ...string) // 对象 this.GetObject(adapter.NewRedis()).(*adapter.Redis)
+NewRedisPool(ctr iface.IContext, componentId ...interface{}) // this.GetObjPool(adapter.NewRedisPool).(*adapter.Redis)
 redis.Get(key)                 // 获取key的值
 redis.MGet(keys)               // 并行获取多个key的值
 redis.Set(key, val)            // 设置key的值

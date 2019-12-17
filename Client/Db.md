@@ -37,6 +37,8 @@ components:
 
 ```go
 // 普通方法列表
+NewDb(componentId ...string) // 对象  this.GetObj(adapter.NewDb()).(adapter.IDb)/(*adapter.Db)
+NewDbPool(ctr iface.IContext, componentId ...interface{}) // 对象池 this.GetObj(adapter.NewDb()).(adapter.IDb)/(*adapter.Db)
 db.SetMaster(v bool) // 设置查询操作是否从master
 db.Begin(opts ...*sql.TxOptions) ITx // 开始一个新事务,并返回一次性的事务对象(默认超时上下文) 
 db.BeginContext(ctx context.Context, opts *sql.TxOptions) ITx // 开始一个新事务，并返回一次性的事务对象(指定上下文)

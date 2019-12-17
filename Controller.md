@@ -30,17 +30,6 @@ type WelcomeController struct {
     pgo2.Controller	// 继承于框架基类
 }
 
-// 可选构造函数(框架自动调用)
-func (w *WelcomeController) Construct() {
-    // 可用于初始化对象属性
-}
-
-// 可选初始化函数(框架自动调用)
-func (w *WelcomeController) Init() {
-    // 可用于对象的初始化逻辑，调用到这里时，
-    // 对象的构造方法及属性设置操作已经完成
-}
-
 // 执行action前调用的钩子，可在此执行权限验证，公共参数处理等
 func (w *WelcomeController) BeforeAction(action string) {
 }
@@ -75,11 +64,11 @@ func (w *WelcomeController) ActionSayHello() {
 
     // 打印日志
     ctx.Info("request from welcome, name:%s, age:%d, ip:%s", name, age, ip)
-    ctx.PushLog("clientIp", ctx.GetClientIp()) // 生成clientIp=xxxxx在pushlog中
+    ctx.PushLog("clientIp", ctx.ClientIp()) // 生成clientIp=xxxxx在pushlog中
 
-    // 调用业务逻辑，一个请求生命周期内的对象都要通过GetObject()获取，
+    // 调用业务逻辑，一个请求生命周期内的对象都要通过GetObj()获取，
     // 这样可自动查找注册的类，并注入请求上下文(Context)到对象中。
-    svc := w.GetObject("Service/Welcome").(*Service.Welcome)
+    svc := w.GetObj(service.NewWelcome()).(*service.Welcome)
 
     // 添加耗时到profile日志中
     ctx.ProfileStart("Welcome.SayHello")

@@ -32,7 +32,7 @@ log:
         # 信息日志
         info:
             # 文件输出
-            class: "file"
+            name: "file"
 
             # 处理的日志级别
             levels: "DEBUG,INFO,NOTICE"
@@ -54,7 +54,7 @@ log:
 
         # 错误日志
         error:
-            class: "file"
+            name: "file"
             levels: "WARN,ERROR,FATAL"
             filePath: "@runtime/error.log"
             maxLogFile: 10
@@ -62,7 +62,7 @@ log:
 
         # 控制台日志
         console:
-            class: "console"
+            name: "console"
             levels: "ALL"
 ```
 

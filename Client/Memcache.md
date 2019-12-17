@@ -26,6 +26,8 @@ components:
 
 ## 功能列表
 ```go
+NewMemCache(componentId ...string) // 对象 this.GetObj(adapter.NewMemCache()).(adapter.IMemCache)/(*adapter.MemCache)
+NewMemCachePool(ctr iface.IContext, componentId ...interface{}) // 对象池 this.GetObjPool(adapter.NewMemCachePool).(adapter.IMemCache)/(*adapter.MemCache)
 mc.Get(key)                 // 获取key的值
 mc.MGet(keys)               // 并行获取多个key的值
 mc.Set(key, val)            // 设置key的值

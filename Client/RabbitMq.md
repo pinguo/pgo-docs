@@ -44,7 +44,8 @@ components:
 ## 功能列表
 
 ```go
-
+NewRabbitMq(componentId ...string) // 对象 this.GetObj(adapter.NewRabbitMq()).(adapter.IRabbitMq)/(*adapter.RabbitMq)
+NewRabbitMqPool(ctr iface.IContext, componentId ...interface{}) // 对象池 this.GetObjPool(adapter.NewRabbitMqPool).(adapter.IRabbitMq)/(*adapter.RabbitMq)
 rabbitMq.ExchangeDeclare()               // 定义交换机
 rabbitMq.Publish(opCode, data)           // 发布数据
 rabbitMq.GetConsumeChannelBox()          // 获取消费者RabbitMq channal对象
