@@ -142,10 +142,10 @@ func (m *MysqlController) ActionTransaction() {
     // 获取db的上下文适配对象
     db := m.GetObj(adapter.NewDb()).(*adapter.Db)
 
-    db.Begin()
-    db.Exec("INSERT INTO test (name, age) VALUES (?, ?)", "name1", 1)
-    db.Exec("UPDATE test SET age=age+1 WHERE id=?", 1)
-    db.Commit()
+    tx := db.Begin()
+    tx.Exec("INSERT INTO test (name, age) VALUES (?, ?)", "name1", 1)
+    tx.Exec("UPDATE test SET age=age+1 WHERE id=?", 1)
+    tx.Commit()
 }
 
 // 使用对象池
