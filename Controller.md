@@ -18,7 +18,7 @@ HTTP控制器位于`pkg/controller`目录下，类后后缀为`Controller`。
 ## 使用示例
 
 ```go
-package Controller
+package controller
 
 import (
     "net/http"

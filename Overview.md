@@ -112,7 +112,7 @@ go modules
     - 在项目根目录执行`go get -u github.com/pinguo/pgo2`
 5. 创建service(pkg/service/Welcome.go)
     ```go
-    package Service
+    package service
 
     import (
         "fmt"
@@ -150,7 +150,7 @@ go modules
 
     // 默认动作为index, 通过/welcome或/welcome/index调用
     func (w *WelcomeController) ActionIndex() {
-        w.OutputJson("hello world", http.StatusOK)
+        w.Json("hello world", http.StatusOK)
     }
     
     // URL路由动作，根据url自动映射控制器及方法，不需要配置.
@@ -187,7 +187,7 @@ go modules
         }
     
         // 输出json数据
-        w.OutputJson(data, http.StatusOK)
+        w.Json(data, http.StatusOK)
     }
     
     // 正则路由动作，需要配置Router组件(components.router.rules)
@@ -195,7 +195,7 @@ go modules
     // eg. "^/reg/eg/(\\w+)/(\\w+)$ => /welcome/regexp-example"
     func (w *WelcomeController) ActionRegexpExample(p1, p2 string) {
         data := pgo2.Map{"p1": p1, "p2": p2}
-        w.OutputJson(data, http.StatusOK)
+        w.Json(data, http.StatusOK)
     }
     
     // RESTFULL动作，url中没有指定动作名，使用请求方法作为动作的名称(需要大写)
@@ -205,11 +205,12 @@ go modules
     }
     
     ```
-7. 创建程序入口(src/Main/main.go)
+7. 创建程序入口(cmd/projectName/main.go)
     ```go
     package main
 
     import (
+        _ "command" // 导入控制器
         _ "controller" // 导入控制器
 
         "github.com/pinguo/pgo2"

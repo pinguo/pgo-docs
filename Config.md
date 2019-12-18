@@ -1,9 +1,9 @@
 # 配置组件(Config)
 用于管理应用程序的配置文件，支持全局配置和环境配置，支持yaml和json配置文件，推荐使用yaml配置文件以支持注释等特性。
 用户可以自定义Config组件
-pg2.App().SetConfig(config config.IConfig) // (可选)配置组件  
+pgo2.App().SetConfig(config config.IConfig) // (可选)配置组件  
 
-pg2.App().Config().AddParser(ext string, parser IConfigParser) // (可选)自定义配置解析器 根据后缀自动选择
+pgo2.App().Config().AddParser(ext string, parser IConfigParser) // (可选)自定义配置解析器 根据后缀自动选择
 
 用户可以自行添加特定文件后缀的配置文件解析器，参见Config.AddParser().
 
