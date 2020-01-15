@@ -35,7 +35,7 @@ components:
         # 服务器探活tcp链接间隔(自动剔除和添加server)，默认关闭,可不配置
         probInterval: "0s"
         # 当前系统名字
-        ServiceName: "pgo"
+        serviceName: "pgo"
         # 服务器地址，如果server有权重，请自行按比例添加
         servers:
             - "127.0.0.1:5672"
